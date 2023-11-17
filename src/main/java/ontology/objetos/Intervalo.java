@@ -26,7 +26,6 @@ public abstract class Intervalo {
 	public void setFin(int fin) {
 		this.fin = fin;
 	}
-
 	
 	
 }

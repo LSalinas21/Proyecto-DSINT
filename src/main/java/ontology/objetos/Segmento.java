@@ -4,13 +4,13 @@ public abstract class Segmento {
 	
 	private int inicio;
 	private int fin;
-	private Ciclo ciclo;
+	private int numCiclo;
 	
-	public Segmento(int inicio, int fin, Ciclo ciclo) {
+	public Segmento(int inicio, int fin, int numCiclo) {
 
 		this.inicio = inicio;
 		this.fin = fin;
-		this.ciclo = ciclo;
+		this.numCiclo = numCiclo;
 	}
 
 	public int getInicio() {
@@ -29,12 +29,12 @@ public abstract class Segmento {
 		this.fin = fin;
 	}
 
-	public Ciclo getCiclo() {
-		return ciclo;
+	public int getNumCiclo() {
+		return numCiclo;
 	}
 
-	public void setCiclo(Ciclo ciclo) {
-		this.ciclo = ciclo;
+	public void setNumCiclo(int ciclo) {
+		this.numCiclo = ciclo;
 	}
 	
 	

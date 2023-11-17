@@ -13,8 +13,8 @@ public class ComplejoQRS extends Complejo{
 	private OndaS ondaS;
 	
 
-	public ComplejoQRS(Ciclo ciclo, int inicio, int fin, OndaQ ondaQ, OndaR ondaR, OndaS ondaS) {
-		super(ciclo, inicio, fin);
+	public ComplejoQRS(OndaQ ondaQ, OndaR ondaR, OndaS ondaS) {
+		super(ondaQ.getInicio(),ondaS.getFin());
 		this.ondaQ = ondaQ;
 		this.ondaR = ondaR;
 		this.ondaS = ondaS;
@@ -43,6 +43,9 @@ public class ComplejoQRS extends Complejo{
 	public void setOndaS(OndaS ondaS) {
 		this.ondaS = ondaS;
 	}
-	
+	public int getNumCiclo() {
+		
+		return ondaQ.getNumCiclo();
+	}
 	
 }

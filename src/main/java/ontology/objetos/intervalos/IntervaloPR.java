@@ -32,5 +32,11 @@ public class IntervaloPR extends Intervalo{
 		this.segPR = segPR;
 	}
 	
+	public int getNumCiclo() {
+		
+		return this.ondP.getNumCiclo();
+	}
+	
+	
 	
 }

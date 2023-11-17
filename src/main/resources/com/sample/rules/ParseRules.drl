@@ -3,27 +3,92 @@ package com.rules
 
 //list any import classes here.
 
-
+import ontology.objetos.*;
+import ontology.objetos.ondas.*;
+import ontology.objetos.segmentos.*;
+import ontology.objetos.intervalos.*;
+import ontology.objetos.complejos.*;
+//import ontology.onjetos.ondas.*
 
 //declare any global variables here
 
 
 
-
-rule "Your First Rule"
-
+rule "Crea SegementoPR"
+    //include attributes such as "salience" here...
+    //agenda-group "Ciclos"
+    
     when
-        //conditions
+        $ondP: OndaP()
+        $ondQ: OndaQ(numCiclo == $ondP.getNumCiclo())
     then
-        //actions
-
+       	insert(new SegmentoPR($ondP.getFin(),$ondQ.getInicio(),$ondP.getNumCiclo()));
 end
 
-rule "Your Second Rule"
+rule "Crea SegementoST"
     //include attributes such as "salience" here...
     when
-        //conditions
+        $ondS: OndaS()
+        $ondT: OndaT(numCiclo == $ondS.getNumCiclo())
     then
-        //actions
+       	insert(new SegmentoST($ondS.getFin(),$ondT.getInicio(),$ondS.getNumCiclo()));
+end
+
+rule "Crea SegementoTP"
+    //include attributes such as "salience" here...
+    when
+        $ondT: OndaT()
+        $ondP: OndaP(numCiclo-1 == $ondT.getNumCiclo())
+    then
+       	insert(new SegmentoTP($ondT.getFin(),$ondP.getInicio(),$ondT.getNumCiclo()));
 
 end
+
+rule "Crea Ritmo Cardiaco"
+
+   when
+    	$ondMin: Onda() // Patrón para seleccionar cualquier objeto Ejemplo
+    	$ondMax: Onda()
+    	not Onda(inicio < $ondMin.getInicio()) // No hay otro objeto con valorBajo menor
+    	not Onda(fin > $ondMax.getFin()) // No hay otro objeto con valorAlto mayor
+	then
+    	// $ejemplo contiene el objeto con el valor más bajo de valorBajo y el valor más alto de valorAlto
+    	int rpm = (int)(Math.ceil((60000.0/(($ondMax.getFin() - $ondMin.getInicio())/$ondMax.getNumCiclo()))));
+    	insert(new RitmoCardiaco(rpm));
+
+end
+
+rule "Crea Complejo QRS"
+
+    when
+		$ondQ: OndaQ() // Patrón para seleccionar cualquier objeto Ejemplo
+    	$ondR: OndaR(numCiclo == $ondQ.getNumCiclo())
+    	$ondS: OndaS(numCiclo == $ondQ.getNumCiclo())
+    then
+       	insert(new ComplejoQRS($ondQ,$ondR,$ondS));
+       
+
+end  
+rule "Crea intervaloPR"
+
+    when
+		$segPR: SegmentoPR() // Patrón para seleccionar cualquier objeto Ejemplo
+    	$ondP: OndaP(numCiclo == $segPR.getNumCiclo())
+    then
+       	insert(new IntervaloPR($ondP,$segPR));
+       
+
+end
+
+rule "Crea intervalosQT"
+    //include attributes such as "salience" here...
+    when
+		//$segPR: SegmentoPR() // Patrón para seleccionar cualquier objeto Ejemplo
+    	//$ondP: OndaP(numCiclo == $segPR.getNumCiclo())
+    then
+       	//insert(new IntervaloPR($ondP,$segPR));
+end
+
+
+       
+
