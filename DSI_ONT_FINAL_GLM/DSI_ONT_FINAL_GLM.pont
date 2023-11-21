@@ -1,0 +1,390 @@
+; Fri Nov 17 18:13:34 CET 2023
+; 
+;+ (version "3.4.8")
+;+ (build "Build 629")
+
+
+(defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
+	(is-a USER)
+	(role abstract)
+	(multislot patrones
+		(type INSTANCE)
+;+		(allowed-classes Patron)
+		(create-accessor read-write))
+	(multislot diagnostico
+		(type INSTANCE)
+;+		(allowed-classes Enfermedad)
+		(create-accessor read-write))
+	(single-slot ciclo
+		(type INSTANCE)
+;+		(allowed-classes Ciclo)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot ondaQ
+		(type INSTANCE)
+;+		(allowed-classes OndaQ)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot ondaP
+		(type INSTANCE)
+;+		(allowed-classes OndaP)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot ppm
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot segmentoST
+		(type INSTANCE)
+;+		(allowed-classes SegmentoST)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot ondaT
+		(type INSTANCE)
+;+		(allowed-classes OndaT)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot ondaS
+		(type INSTANCE)
+;+		(allowed-classes OndaS)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot ondaR
+		(type INSTANCE)
+;+		(allowed-classes OndaR)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot ecg
+		(type INSTANCE)
+;+		(allowed-classes ECG)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot fin
+		(type INTEGER)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot intervaloQT
+		(type INSTANCE)
+;+		(allowed-classes IntervaloQT)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot complejoQRS
+		(type INSTANCE)
+;+		(allowed-classes ComplejoQRS)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot paciente
+		(type INSTANCE)
+;+		(allowed-classes Paciente)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot nCiclo
+		(type INTEGER)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot intervaloPR
+		(type INSTANCE)
+;+		(allowed-classes IntervaloPR)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot inicio
+		(type INTEGER)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot listaCiclos
+		(type INSTANCE)
+;+		(allowed-classes Ciclo)
+		(create-accessor read-write))
+	(single-slot segmentoPR
+		(type INSTANCE)
+;+		(allowed-classes SegmentoPR)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot ritmoCardiaco
+		(type INSTANCE)
+;+		(allowed-classes RitmoCardiaco)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot nombre
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot segmentoTP
+		(type INSTANCE)
+;+		(allowed-classes SegmentoTP)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot pico
+		(type FLOAT)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Onda
+	(is-a USER)
+	(role abstract)
+	(single-slot inicio
+		(type INTEGER)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot fin
+		(type INTEGER)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot pico
+		(type FLOAT)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot ciclo
+		(type INSTANCE)
+;+		(allowed-classes Ciclo)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass OndaP "La onda P es la señal eléctrica que corresponde a la despolarización auricular. Tiene una duración de 110 ms y el pico no supera los 0,25 mV."
+	(is-a Onda)
+	(role concrete))
+
+(defclass OndaQ "Es la primera onda negativa que aparece en el complejo QRS."
+	(is-a Onda)
+	(role concrete))
+
+(defclass OndaR "Es la primera deflexión positiva del complejo QRS y en la imagen clásica del ECG, es la de mayor tamaño."
+	(is-a Onda)
+	(role concrete))
+
+(defclass OndaS "Es cualquier onda negativa que siga a la onda R."
+	(is-a Onda)
+	(role concrete))
+
+(defclass OndaT "La onda T representa la repolarización de los ventrículos. Dura aproximadamente 200 ms o menos y mide 0,2 a 0,3 mV."
+	(is-a Onda)
+	(role concrete))
+
+(defclass Intervalo
+	(is-a USER)
+	(role abstract)
+	(single-slot inicio
+		(type INTEGER)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot fin
+		(type INTEGER)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot ciclo
+		(type INSTANCE)
+;+		(allowed-classes Ciclo)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass IntervaloQT "Intervalo entre el comienzo de la onda Q y el final de la onda T. El valor normal del intervalo QT está entre 300 y 440 (450 en mujeres) ms."
+	(is-a Intervalo)
+	(role concrete)
+	(single-slot complejoQRS
+		(type INSTANCE)
+;+		(allowed-classes ComplejoQRS)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot segmentoST
+		(type INSTANCE)
+;+		(allowed-classes SegmentoST)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot ondaT
+		(type INSTANCE)
+;+		(allowed-classes OndaT)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass IntervaloPR "Intervalo entre el comienzo de la onda P y el comienzo de la onda Q."
+	(is-a Intervalo)
+	(role concrete)
+	(single-slot ondaP
+		(type INSTANCE)
+;+		(allowed-classes OndaP)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot segmentoPR
+		(type INSTANCE)
+;+		(allowed-classes SegmentoPR)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Complejo
+	(is-a USER)
+	(role abstract)
+	(single-slot inicio
+		(type INTEGER)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot fin
+		(type INTEGER)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot ciclo
+		(type INSTANCE)
+;+		(allowed-classes Ciclo)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass ComplejoQRS "Complejo de ondas formado por la onda Q, la onda R y la onda S. Comienza con el principio de la onda Q y finaliza con el final de la onda S. Tiene una duración entre 60 y 100 ms."
+	(is-a Complejo)
+	(role concrete)
+	(single-slot ondaQ
+		(type INSTANCE)
+;+		(allowed-classes OndaQ)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot ondaS
+		(type INSTANCE)
+;+		(allowed-classes OndaS)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot ondaR
+		(type INSTANCE)
+;+		(allowed-classes OndaR)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Paciente "Clase cuyas instancias representan pacientes. Contiene una lista con los ECGs del paciente."
+	(is-a USER)
+	(role concrete)
+	(single-slot ecg
+		(type INSTANCE)
+;+		(allowed-classes ECG)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot nombre
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass ECG "Clase que representa el electrocardiograma de un paciente. Contiene una lista con los ciclos medidos en el ECG."
+	(is-a USER)
+	(role concrete)
+	(single-slot ritmoCardiaco
+		(type INSTANCE)
+;+		(allowed-classes RitmoCardiaco)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot listaCiclos
+		(type INSTANCE)
+;+		(allowed-classes Ciclo)
+		(create-accessor read-write))
+	(multislot patrones
+		(type INSTANCE)
+;+		(allowed-classes Patron)
+		(create-accessor read-write))
+	(single-slot %3ANAME
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot diagnostico
+		(type INSTANCE)
+;+		(allowed-classes Enfermedad)
+		(create-accessor read-write)))
+
+(defclass Enfermedad
+	(is-a USER)
+	(role concrete)
+	(single-slot %3ANAME
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Segmento
+	(is-a USER)
+	(role abstract)
+	(single-slot inicio
+		(type INTEGER)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot fin
+		(type INTEGER)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot ciclo
+		(type INSTANCE)
+;+		(allowed-classes Ciclo)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass SegmentoPR "Segmento comprendido entre el final de la onda P y el comienzo de la onda Q."
+	(is-a Segmento)
+	(role concrete))
+
+(defclass SegmentoST "Segmento comprendido entre el final de la onda S y el comienzo de la onda T."
+	(is-a Segmento)
+	(role concrete))
+
+(defclass SegmentoTP "Segmento comprendido entre el final de la onda T y el comienzo de la onda P."
+	(is-a Segmento)
+	(role concrete))
+
+(defclass Ciclo "Ciclo completo de una onda del ECG. Cada ciclo se compone de un intervalo PR, un intervalo QT y un segmento TP."
+	(is-a USER)
+	(role concrete)
+	(single-slot ecg
+		(type INSTANCE)
+;+		(allowed-classes ECG)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot intervaloPR
+		(type INSTANCE)
+;+		(allowed-classes IntervaloPR)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot intervaloQT
+		(type INSTANCE)
+;+		(allowed-classes IntervaloQT)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot segmentoTP
+		(type INSTANCE)
+;+		(allowed-classes SegmentoTP)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot nCiclo
+		(type INTEGER)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass RitmoCardiaco "Número de ciclos por segundo detectados en el ECG."
+	(is-a USER)
+	(role concrete)
+	(single-slot ppm
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %3ANAME
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Patron
+	(is-a USER)
+	(role abstract)
+	(single-slot %3ANAME
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass OndaTPlanaOInvertida "Onda T con un valor pico inferior a 0,2 mV."
+	(is-a Patron)
+	(role concrete))
+
+(defclass ComplejoQRSLargo "Complejo QRS con duración superior a 100 ms."
+	(is-a Patron)
+	(role concrete))
+
+(defclass IntervaloPRLargo
+	(is-a Patron)
+	(role concrete))
+
+(defclass IntervaloQTLargo "Intervalo QT con duración superior a 480 ms."
+	(is-a Patron)
+	(role concrete))
+
+(defclass OndasTHiperagudas "Onda T con un valor pico superior a los 0,3 mV."
+	(is-a Patron)
+	(role concrete))
