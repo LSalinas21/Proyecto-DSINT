@@ -7,6 +7,7 @@ import ontology.objetos.*;
 import ontology.objetos.intervalos.*;
 import ontology.objetos.segmentos.*;
 import ontology.objetos.ondas.*;
+import ontology.objetos.complejos.*;
 
 
 //declare any global variables here
@@ -25,14 +26,14 @@ rule "Bradicardia"
 
 end
 
-rule "Taticardia"
+rule "Taquicardia"
 	agenda-group "Enfermedades"
     when
         $r: RitmoCardiaco(ppm > 100)
-    not Enfermedad(nombre == "Taticardia")
+    not Enfermedad(nombre == "Taquicardia")
     then
-        insert(new Enfermedad("Taticardia"));
-        insert(new Patron("** Hight Heart Rate present (Taticardia) cycle: NA"));
+        insert(new Enfermedad("Taquicardia"));
+        insert(new Patron("** Hight Heart Rate present (Taquicardia) cycle: NA"));
 
 end
 rule "Hipocalcemia"
@@ -61,7 +62,7 @@ end
 rule "Infarto agudo de miocardio"
     agenda-group "Enfermedades"
     when
-        $ondT: OndaT(pico > 0.3)
+        $ondT: OndaT(pico > 1)
         not Enfermedad(nombre == "IAM")
     then
         insert(new Enfermedad("IAM"));
@@ -78,6 +79,17 @@ rule "Isquemia coronaria"
         insert(new Patron("** negative T wave present (isq-coronaria) cycle: " + $ondT.getNumCiclo()));
 
 end
+rule "contraciones ventriculares prematuras"
+    agenda-group "Enfermedades"
+    when
+        $comQRS: ComplejoQRS(duracion > 100)
+    not Enfermedad(nombre == "contraciones ventriculares prematuras")
+    then
+        insert(new Enfermedad("contraciones ventriculares prematuras"));
+        insert(new Patron("** long QRS present (Contraccion ventricular prematura) " + $comQRS.getNumCiclo()));
+
+end
+
 rule "crea Diagnostico"
     agenda-group "Diagnostico"
     when
