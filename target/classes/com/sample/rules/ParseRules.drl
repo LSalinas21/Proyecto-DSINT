@@ -86,10 +86,11 @@ rule "Crea intervalosQT"
     //include attributes such as "salience" here...
     agenda-group "Ciclos"
     when
-		$segST: SegmentoST() // Patrón para seleccionar cualquier objeto Ejemplo
+    	$comQRS: ComplejoQRS()
+		$segST: SegmentoST(numCiclo == $comQRS.getNumCiclo()) // Patrón para seleccionar cualquier objeto Ejemplo
     	$ondT: OndaT(numCiclo == $segST.getNumCiclo())
     then
-       	insert(new IntervaloQT($ondT,$segST));
+       	insert(new IntervaloQT($comQRS,$ondT,$segST));
 end
 
 

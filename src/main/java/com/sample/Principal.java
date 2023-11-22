@@ -6,13 +6,14 @@ import java.util.HashMap;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.rule.Agenda;
 
 import ontology.objetos.Onda;
 import parser.Parser;
 
 public class Principal {
 	
-	private static String ruta = "C:\\Users\\juanj\\OneDrive\\Escritorio\\DSInt\\ECG-input.recursos\\ECG-input\\bradicardia.ecg";
+	private static String ruta = "C:\\Users\\juanj\\OneDrive\\Escritorio\\DSInt\\ECG-input.recursos\\ECG-input\\iam.ecg";
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
@@ -29,7 +30,10 @@ public class Principal {
             	
             	kSession.insert(o);
             }
-            
+            Agenda agenda = kSession.getAgenda();
+            agenda.getAgendaGroup("Ciclos").setFocus();
+            kSession.fireAllRules();
+            agenda.getAgendaGroup("Enfermedades").setFocus();
             kSession.fireAllRules();
             
             

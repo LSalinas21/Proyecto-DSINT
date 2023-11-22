@@ -1,0 +1,60 @@
+//created on: 21 nov 2023
+package com.rules
+
+//list any import classes here.
+
+import ontology.objetos.*;
+import ontology.objetos.intervalos.*;
+import ontology.objetos.segmentos.*;
+import ontology.objetos.ondas.*;
+
+//declare any global variables here
+
+
+
+
+rule "Bradicardia"
+	agenda-group "Enfermedades"
+    when
+        $r: RitmoCardiaco(ppm < 60)
+    then
+        System.out.println("Bradicardia");
+
+end
+
+rule "Taticardia"
+	agenda-group "Enfermedades"
+    when
+        $r: RitmoCardiaco(ppm > 100)
+    then
+        System.out.println("Taticardia");
+
+end
+rule "Hipocalcemia"
+    agenda-group "Enfermedades"
+    when
+        $segST: SegmentoST(duracion > 150)
+        $intQT: IntervaloQT(duracion > 440 , $intQT.getNumCiclo() == $segST.getNumCiclo())
+    then
+        System.out.println("Hipocalcemia ");
+
+end
+
+rule "Hipopotasemia"
+    agenda-group "Enfermedades"
+    when
+        $ondT: OndaT(pico < 0.2)
+        
+    then
+        System.out.println("Hipopotasemia");
+
+end
+rule "Infarto agudo de miocardio"
+    agenda-group "Enfermedades"
+    when
+        $ondT: OndaT(pico > 0.3)
+        not Enfermedad(nombre == "IAM")
+    then
+        insert(new Enfermedad("IAM"));
+
+end

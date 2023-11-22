@@ -5,12 +5,14 @@ public abstract class Segmento {
 	private int inicio;
 	private int fin;
 	private int numCiclo;
+	private int duracion;
 	
 	public Segmento(int inicio, int fin, int numCiclo) {
 
 		this.inicio = inicio;
 		this.fin = fin;
 		this.numCiclo = numCiclo;
+		this.duracion = fin - inicio;
 	}
 
 	public int getInicio() {
@@ -35,6 +37,14 @@ public abstract class Segmento {
 
 	public void setNumCiclo(int ciclo) {
 		this.numCiclo = ciclo;
+	}
+
+	public int getDuracion() {
+		return duracion;
+	}
+
+	public void setDuracion(int duracion) {
+		this.duracion = duracion;
 	}
 	
 	

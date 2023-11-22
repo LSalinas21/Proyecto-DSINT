@@ -4,12 +4,14 @@ public abstract class Complejo {
 
 	private int inicio;
 	private int fin;
+	private int numCiclo;
 	
 	
-	public Complejo(int inicio, int fin) {
+	public Complejo(int inicio, int fin, int numCiclo) {
 
 		this.inicio = inicio;
 		this.fin = fin;
+		this.numCiclo = numCiclo;
 	}
 
 	public int getInicio() {
@@ -23,6 +25,14 @@ public abstract class Complejo {
 	}
 	public void setFin(int fin) {
 		this.fin = fin;
+	}
+
+	public int getNumCiclo() {
+		return numCiclo;
+	}
+
+	public void setNumCiclo(int numCiclo) {
+		this.numCiclo = numCiclo;
 	}
 	
 	

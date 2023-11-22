@@ -2,6 +2,7 @@ package ontology.objetos.intervalos;
 
 import ontology.objetos.Ciclo;
 import ontology.objetos.Intervalo;
+import ontology.objetos.complejos.ComplejoQRS;
 import ontology.objetos.ondas.OndaT;
 import ontology.objetos.segmentos.SegmentoST;
 
@@ -9,11 +10,13 @@ public class IntervaloQT extends Intervalo{
 	
 	private OndaT ondT;
 	private SegmentoST segST;
+	private ComplejoQRS comQRS;
 	
-	public IntervaloQT(OndaT ondT, SegmentoST segST) {
-		super(segST.getInicio(), ondT.getFin()); // Esto no se si este bien, al parecer comienza desde la onda Q
+	public IntervaloQT(ComplejoQRS comQRS, OndaT ondT, SegmentoST segST) {
+		super(comQRS.getInicio(), ondT.getFin(), ondT.getNumCiclo()); // Esto no se si este bien, al parecer comienza desde la onda Q
 		this.ondT = ondT;
 		this.segST = segST;
+		this.comQRS = comQRS;
 	}
 
 	public OndaT getOndT() {
@@ -31,6 +34,13 @@ public class IntervaloQT extends Intervalo{
 	public void setSegST(SegmentoST segST) {
 		this.segST = segST;
 	}
-	
+
+	public ComplejoQRS getComQRS() {
+		return comQRS;
+	}
+
+	public void setComQRS(ComplejoQRS comQRS) {
+		this.comQRS = comQRS;
+	}
 	
 }
