@@ -8,6 +8,7 @@ import ontology.objetos.intervalos.*;
 import ontology.objetos.segmentos.*;
 import ontology.objetos.ondas.*;
 
+
 //declare any global variables here
 
 
@@ -17,8 +18,10 @@ rule "Bradicardia"
 	agenda-group "Enfermedades"
     when
         $r: RitmoCardiaco(ppm < 60)
+    not Enfermedad(nombre == "Bradicardia")
     then
-        System.out.println("Bradicardia");
+        insert(new Enfermedad("Bradicardia"));
+        insert(new Patron("** Low Heart Rate present (Bradicardia) cycle: NA"));
 
 end
 
@@ -26,8 +29,10 @@ rule "Taticardia"
 	agenda-group "Enfermedades"
     when
         $r: RitmoCardiaco(ppm > 100)
+    not Enfermedad(nombre == "Taticardia")
     then
-        System.out.println("Taticardia");
+        insert(new Enfermedad("Taticardia"));
+        insert(new Patron("** Hight Heart Rate present (Taticardia) cycle: NA"));
 
 end
 rule "Hipocalcemia"
@@ -35,8 +40,11 @@ rule "Hipocalcemia"
     when
         $segST: SegmentoST(duracion > 150)
         $intQT: IntervaloQT(duracion > 440 , $intQT.getNumCiclo() == $segST.getNumCiclo())
+    not Enfermedad(nombre == "Hipocalcemia")
     then
-        System.out.println("Hipocalcemia ");
+        insert(new Enfermedad("Hipocalcemia"));
+        insert(new Patron("** long ST present (Hipocalcemia) cycle : " + $segST.getNumCiclo()));
+        insert(new Patron("** long QT present (Hipocalcemia) cycle : " + $intQT.getNumCiclo()));
 
 end
 
@@ -44,9 +52,10 @@ rule "Hipopotasemia"
     agenda-group "Enfermedades"
     when
         $ondT: OndaT(pico < 0.2)
-        
+    not Enfermedad(nombre == "Hipopotasemia")
     then
-        System.out.println("Hipopotasemia");
+        insert(new Enfermedad("Hipopotasemia"));
+        insert(new Patron("** negative T wave present (Hipopotasemia) cycle: " + $ondT.getNumCiclo()));
 
 end
 rule "Infarto agudo de miocardio"
@@ -56,5 +65,55 @@ rule "Infarto agudo de miocardio"
         not Enfermedad(nombre == "IAM")
     then
         insert(new Enfermedad("IAM"));
+        insert(new Patron("** large T wave present (IAM) cycle: " + $ondT.getNumCiclo()));
+
+end
+rule "Isquemia coronaria"
+    agenda-group "Enfermedades"
+    when
+        $ondT: OndaT(pico < 0.2)
+    not Enfermedad(nombre == "isq-coronaria")
+    then
+        insert(new Enfermedad("isq-coronaria"));
+        insert(new Patron("** negative T wave present (isq-coronaria) cycle: " + $ondT.getNumCiclo()));
+
+end
+rule "crea Diagnostico"
+    agenda-group "Diagnostico"
+    when
+        $enf: Enfermedad()
+        not Diagnostico(nombre == "dig")
+    then
+        insert(new Diagnostico("dig"));
+
+end
+rule "agrega Enfermedades"
+    agenda-group "Diagnostico"
+    salience -10
+    when
+        $enf: Enfermedad()
+        $dig: Diagnostico()
+    then
+        $dig.setEnfermedades($enf.getNombre());
+        
+end
+rule "agrega patrones"
+    agenda-group "Diagnostico"
+    salience -20
+    when
+        $patt: Patron()
+        $dig: Diagnostico()
+    then
+        $dig.setPatrones($patt.getNombre());
+
+end
+rule "muestra Diagnostico"
+    agenda-group "Diagnostico"
+    salience -30
+    when
+        $dig: Diagnostico()
+    then
+        System.out.println($dig.getEnfermedades());
+        System.out.println($dig.getPatrones());
 
 end

@@ -13,7 +13,7 @@ import parser.Parser;
 
 public class Principal {
 	
-	private static String ruta = "C:\\Users\\juanj\\OneDrive\\Escritorio\\DSInt\\ECG-input.recursos\\ECG-input\\iam.ecg";
+	private static String ruta = "C:\\Users\\juanj\\OneDrive\\Escritorio\\DSInt\\ECG-input.recursos\\ECG-input\\hipocalcemia+iam.ecg";
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
@@ -34,6 +34,8 @@ public class Principal {
             agenda.getAgendaGroup("Ciclos").setFocus();
             kSession.fireAllRules();
             agenda.getAgendaGroup("Enfermedades").setFocus();
+            kSession.fireAllRules();
+            agenda.getAgendaGroup("Diagnostico").setFocus();
             kSession.fireAllRules();
             
             
