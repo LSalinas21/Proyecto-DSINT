@@ -1,0 +1,3 @@
+Hipopotasemia + isq-coronaria
+** negative T wave present (Hipopotasemia) cycle: 1
+** negative T wave present (isq-coronaria) cycle: 1

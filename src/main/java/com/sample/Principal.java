@@ -16,62 +16,72 @@ import org.kie.api.runtime.rule.Agenda;
 
 import ontology.objetos.Onda;
 import parser.Parser;
+import parser.Utilidad;
 
 public class Principal {
 	
-	private static String dirEntrada = "C:\\Users\\juanj\\OneDrive\\Escritorio\\DSInt\\ECG-input.recursos\\ECG-input\\hipocalcemia+iam.ecg";
-	private static String dirSalida = "\\Salida";
-	private static String dirEntrada1 = "C:\\Users\\juanj\\OneDrive\\Escritorio\\DSInt\\ECG-input.recursos\\ECG-input\\";
+	private static String dirEntrada = "ECG-input\\";
+	private static String dirSalida = "Salida\\";
 	
-	private static String patronECG = "\\w*\\.ecg";
+	private static String patronECG = "^(.*\\\\)([^\\\\]+)\\.(\\w+)$";
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		// comprobacion de las rutas
+		Utilidad rutFicheros = new Utilidad(dirEntrada,dirSalida);
+		
 		Pattern patterP = Pattern.compile(patronECG,Pattern.CASE_INSENSITIVE);
 		ArrayList<String> rutas = new ArrayList<String>();
 		try {
-			Files.walk(Paths.get(dirEntrada1)).forEach(ruta-> {
-			    if (Files.isRegularFile(ruta)) {
+			Files.walk(Paths.get(rutFicheros.getDirEntrada())).forEach(ruta-> {
+			    
+				if (Files.isRegularFile(ruta)) {
+			    	
 			    	Matcher matcherECG = patterP.matcher(ruta.toString());
 			    	if (matcherECG.find()) {
+			    		
 			    		rutas.add(ruta.toString());
+			    		rutFicheros.setNomArchivo(matcherECG.group(2));
+			    		//System.out.println(matcherECG.group(0));
+			    		
+			    		try {
+			                // load up the knowledge base
+			    			//System.out.println("\n\n\n" + ruta);
+			    			
+			                KieServices ks = KieServices.Factory.get();
+			                KieContainer kContainer = ks.getKieClasspathContainer();
+			                KieSession kSession = kContainer.newKieSession("reglas-ECG");
+
+			                Parser p = new Parser();
+			                ArrayList<Onda> ondas =  (ArrayList<Onda>) p.parseFile(ruta.toString());
+			                
+			                kSession.insert(rutFicheros);
+			                
+			                for (Onda o: ondas) {
+			                	
+			                	kSession.insert(o);
+			                }
+			                Agenda agenda = kSession.getAgenda();
+			                agenda.getAgendaGroup("Ciclos").setFocus();
+			                kSession.fireAllRules();
+			                agenda.getAgendaGroup("Enfermedades").setFocus();
+			                kSession.fireAllRules();
+			                agenda.getAgendaGroup("Diagnostico").setFocus();
+			                kSession.fireAllRules();
+			                
+			    			
+			            } catch (Throwable t) {
+			                t.printStackTrace();
+			            }
 			    	}
 			    }
+				
 			});
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		
-		try {
-			for(String ruta:rutas) {
-            // load up the knowledge base
-			System.out.println("\n\n\n" + ruta);
-			
-            KieServices ks = KieServices.Factory.get();
-            KieContainer kContainer = ks.getKieClasspathContainer();
-            KieSession kSession = kContainer.newKieSession("reglas-ECG");
-
-            Parser p = new Parser();
-            ArrayList<Onda> ondas =  (ArrayList<Onda>) p.parseFile(ruta);
-            
-            for (Onda o: ondas) {
-            	
-            	kSession.insert(o);
-            }
-            Agenda agenda = kSession.getAgenda();
-            agenda.getAgendaGroup("Ciclos").setFocus();
-            kSession.fireAllRules();
-            agenda.getAgendaGroup("Enfermedades").setFocus();
-            kSession.fireAllRules();
-            agenda.getAgendaGroup("Diagnostico").setFocus();
-            kSession.fireAllRules();
-            
-			}
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
 	}
 
 

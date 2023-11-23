@@ -1,0 +1,59 @@
+Archivo de entrada: bradicardia.ecg
+Bradicardia
+** Low Heart Rate present (Bradicardia) cycle: NA
+
+Archivo de entrada: bradicardia2.ecg
+Bradicardia
+** Low Heart Rate present (Bradicardia) cycle: NA
+
+Archivo de entrada: hipocalcemia+hipopotasemia.ecg
+Hipocalcemia + Hipopotasemia + isq-coronaria + contraciones ventriculares prematuras
+** long ST present (Hipocalcemia) cycle : 6
+** long QT present (Hipocalcemia) cycle : 6
+** negative T wave present (Hipopotasemia) cycle: 6
+** negative T wave present (isq-coronaria) cycle: 6
+** long QRS present (Contraccion ventricular prematura) 6
+
+Archivo de entrada: hipocalcemia+iam.ecg
+Hipocalcemia + IAM + contraciones ventriculares prematuras
+** long ST present (Hipocalcemia) cycle : 1
+** long QT present (Hipocalcemia) cycle : 1
+** large T wave present (IAM) cycle: 1
+** long QRS present (Contraccion ventricular prematura) 1
+
+Archivo de entrada: hipocalcemia+isqcoronaria.ecg
+Hipocalcemia + Hipopotasemia + isq-coronaria + contraciones ventriculares prematuras
+** long ST present (Hipocalcemia) cycle : 4
+** long QT present (Hipocalcemia) cycle : 4
+** negative T wave present (Hipopotasemia) cycle: 4
+** negative T wave present (isq-coronaria) cycle: 4
+** long QRS present (Contraccion ventricular prematura) 4
+
+Archivo de entrada: hipocalcemia.ecg
+Hipocalcemia + contraciones ventriculares prematuras
+** long ST present (Hipocalcemia) cycle : 3
+** long QT present (Hipocalcemia) cycle : 3
+** long QRS present (Contraccion ventricular prematura) 3
+
+Archivo de entrada: hipopotasemia.ecg
+Hipopotasemia + isq-coronaria
+** negative T wave present (Hipopotasemia) cycle: 1
+** negative T wave present (isq-coronaria) cycle: 1
+
+Archivo de entrada: iam.ecg
+IAM
+** large T wave present (IAM) cycle: 1
+
+Archivo de entrada: isq-coronaria.ecg
+Hipopotasemia + isq-coronaria
+** negative T wave present (Hipopotasemia) cycle: 1
+** negative T wave present (isq-coronaria) cycle: 1
+
+Archivo de entrada: taquicardia.ecg
+Taquicardia
+** Hight Heart Rate present (Taquicardia) cycle: NA
+
+Archivo de entrada: taquicardia2.ecg
+Taquicardia
+** Hight Heart Rate present (Taquicardia) cycle: NA
+

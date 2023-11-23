@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import ontology.objetos.Electrocardiograma;
+import ontology.objetos.ECG;
 import ontology.objetos.Onda;
 import ontology.objetos.intervalos.IntervaloPR;
 import ontology.objetos.intervalos.IntervaloQT;
@@ -37,10 +37,6 @@ public class Parser {
         FileReader fr = new FileReader(fileName);
         BufferedReader br = new BufferedReader(fr);
         String linea = br.readLine();
-        
-        int contCiclos = 0;
-        
-        //Electrocardiograma ecg = new Electrocardiograma();
         
         Pattern patterP = Pattern.compile(patronOndaP,
                 Pattern.CASE_INSENSITIVE);
@@ -120,6 +116,7 @@ public class Parser {
             
         	linea = br.readLine();
         }
+        fr.close();
         	
         return listOndas;
     }

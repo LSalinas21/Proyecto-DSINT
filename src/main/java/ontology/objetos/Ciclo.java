@@ -7,12 +7,12 @@ import ontology.objetos.segmentos.SegmentoTP;
 public class Ciclo {
 	
 	private int numCiclo;
-	private Electrocardiograma ecg;
+	private ECG ecg;
 	private IntervaloPR intPR;
 	private IntervaloQT intQT;
 	private SegmentoTP segTP;
 	
-	public Ciclo(int numCiclo, Electrocardiograma ecg, IntervaloPR intPR, IntervaloQT intQT, SegmentoTP segTP) {
+	public Ciclo(int numCiclo, ECG ecg, IntervaloPR intPR, IntervaloQT intQT, SegmentoTP segTP) {
 
 		this.numCiclo = numCiclo;
 		this.ecg = ecg;
@@ -29,11 +29,11 @@ public class Ciclo {
 		this.numCiclo = numCiclo;
 	}
 
-	public Electrocardiograma getEcg() {
+	public ECG getEcg() {
 		return ecg;
 	}
 
-	public void setEcg(Electrocardiograma ecg) {
+	public void setEcg(ECG ecg) {
 		this.ecg = ecg;
 	}
 

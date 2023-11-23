@@ -1,0 +1,4 @@
+Hipocalcemia + contraciones ventriculares prematuras
+** long ST present (Hipocalcemia) cycle : 3
+** long QT present (Hipocalcemia) cycle : 3
+** long QRS present (Contraccion ventricular prematura) 3

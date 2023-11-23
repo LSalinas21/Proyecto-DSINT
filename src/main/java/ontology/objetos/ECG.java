@@ -2,7 +2,7 @@ package ontology.objetos;
 
 import java.util.ArrayList;
 
-public class Electrocardiograma {
+public class ECG {
 	
 	private ArrayList<Enfermedad> diagnostico;
 	private ArrayList<Ciclo> ciclos;
@@ -10,7 +10,7 @@ public class Electrocardiograma {
 	private RitmoCardiaco ritmoCardiaco;
 	private String nombre;
 	
-	public Electrocardiograma(ArrayList<Ciclo> ciclos,
+	public ECG(ArrayList<Ciclo> ciclos,
 			RitmoCardiaco ritmoCardiaco, String nombre) {
 		
 		this.ciclos = ciclos;
