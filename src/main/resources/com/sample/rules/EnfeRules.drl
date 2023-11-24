@@ -81,12 +81,13 @@ end
 rule "enfermedad contraciones ventriculares prematuras"
     agenda-group "Enfermedades"
     when
-        $comQRS: ComplejoQRS(duracion > 100)
+        $comQRS: ComplejoQRS(duracion > 120)
     	not ComplejoQRSLargo()
     then
         insert(new ComplejoQRSLargo("** long QRS present (Contraccion ventricular prematura) " + $comQRS.getNumCiclo()));
 
 end
+//Modificada
 rule "contraciones ventriculares prematuras 2"
     agenda-group "Enfermedades"
     when

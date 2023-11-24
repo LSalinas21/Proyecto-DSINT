@@ -12,11 +12,12 @@ import ontology.objetos.ondas.*;
 
 public class Parser {
 
-	private static String patronOndaP = "P\\((\\d+),(\\d+),(-{0,1}\\d+(\\.\\d+))?\\)";
-	private static String patronOndaQ = "Q\\((\\d+),(\\d+),(-{0,1}\\d+(\\.\\d+))?\\)";
-	private static String patronOndaR = "R\\((\\d+),(\\d+),(\\d+(\\.\\d+))?\\)";
-	private static String patronOndaS = "S\\((\\d+),(\\d+),(-{0,1}\\d+(\\.\\d+))?\\)";
-	private static String patronOndaT = "T\\((\\d+),(\\d+),(-{0,1}\\d+(\\.\\d+))?\\)";
+	private static String patronOndaP = "P\\((\\d+),(\\d+),(.*)\\)";
+	//private static String patronOndaQ = "Q\\((\\d+),(\\d+),(-{0,1}\\d+(\\.\\d+))?\\)";
+	private static String patronOndaQ = "Q\\((\\d+),(\\d+),(.*)\\)";
+	private static String patronOndaR = "R\\((\\d+),(\\d+),(.*)\\)";
+	private static String patronOndaS = "S\\((\\d+),(\\d+),(.*)\\)";
+	private static String patronOndaT = "T\\((\\d+),(\\d+),(.*)\\)";
 	
 	public ArrayList<Onda> parseFile(String fileName) throws IOException {
 
@@ -64,8 +65,6 @@ public class Parser {
             	
             	
             }else if (matcherQ.find()) {
-            	
-
             	
             	ondQ = new OndaQ(Integer.parseInt(matcherQ.group(1)),Integer.parseInt(matcherQ.group(2)),
 						Double.parseDouble(matcherQ.group(3)),ciclo);

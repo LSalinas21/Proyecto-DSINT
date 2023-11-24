@@ -12,6 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.kie.api.KieServices;
+import org.kie.api.logger.KieRuntimeLogger;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.rule.Agenda;
@@ -50,6 +51,7 @@ public class Principal {
 			                KieServices ks = KieServices.Factory.get();
 			                KieContainer kContainer = ks.getKieClasspathContainer();
 			                KieSession kSession = kContainer.newKieSession("reglas-ECG");
+			                KieRuntimeLogger audit = ks.getLoggers().newFileLogger(kSession,".log");
 
 			                Parser p = new Parser();
 			                ArrayList<Onda> ondas =  (ArrayList<Onda>) p.parseFile(ruta.toString());
@@ -83,6 +85,7 @@ public class Principal {
 			                
 			                //lee el archivo individual y lo escribe en el todo
 			                escribeEnTodo(matcherECG);
+			                
 			    			
 			            } catch (Throwable t) {
 			                t.printStackTrace();
@@ -97,6 +100,7 @@ public class Principal {
 		}
 		//lee el archivo todo y lo imprime en consola
 		imprimeFicheroTodo();
+		
 		
 	}
 	
