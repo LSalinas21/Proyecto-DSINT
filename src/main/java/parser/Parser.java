@@ -3,25 +3,11 @@ package parser;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-
 import ontology.objetos.Onda;
-import ontology.objetos.intervalos.IntervaloPR;
-import ontology.objetos.intervalos.IntervaloQT;
-import ontology.objetos.ondas.OndaP;
-import ontology.objetos.ondas.OndaQ;
-import ontology.objetos.ondas.OndaR;
-import ontology.objetos.ondas.OndaS;
-import ontology.objetos.ondas.OndaT;
-import ontology.objetos.segmentos.SegmentoTP;
+import ontology.objetos.ondas.*;
 
 
 public class Parser {

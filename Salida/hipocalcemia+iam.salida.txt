@@ -1,4 +1,4 @@
-Hipocalcemia + IAM + contraciones ventriculares prematuras
+Pattern: CVP IAM Hipocalcemia 
 ** long ST present (Hipocalcemia) cycle : 1
 ** long QT present (Hipocalcemia) cycle : 1
 ** large T wave present (IAM) cycle: 1

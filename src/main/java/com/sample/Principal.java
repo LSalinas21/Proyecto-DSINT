@@ -1,11 +1,13 @@
 package com.sample;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,7 +18,6 @@ import org.kie.api.runtime.rule.Agenda;
 
 import ontology.objetos.Onda;
 import parser.Parser;
-import parser.Utilidad;
 
 public class Principal {
 	
@@ -28,20 +29,18 @@ public class Principal {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		// comprobacion de las rutas
-		Utilidad rutFicheros = new Utilidad(dirEntrada,dirSalida);
+		compruebaArgumentos(args);
 		
 		Pattern patterP = Pattern.compile(patronECG,Pattern.CASE_INSENSITIVE);
-		ArrayList<String> rutas = new ArrayList<String>();
+		
 		try {
-			Files.walk(Paths.get(rutFicheros.getDirEntrada())).forEach(ruta-> {
+			Files.walk(Paths.get(dirEntrada)).forEach(ruta-> {
 			    
 				if (Files.isRegularFile(ruta)) {
 			    	
 			    	Matcher matcherECG = patterP.matcher(ruta.toString());
 			    	if (matcherECG.find()) {
-			    		
-			    		rutas.add(ruta.toString());
-			    		rutFicheros.setNomArchivo(matcherECG.group(2));
+
 			    		//System.out.println(matcherECG.group(0));
 			    		
 			    		try {
@@ -55,12 +54,23 @@ public class Principal {
 			                Parser p = new Parser();
 			                ArrayList<Onda> ondas =  (ArrayList<Onda>) p.parseFile(ruta.toString());
 			                
-			                kSession.insert(rutFicheros);
+			                //archivo de salida individual
+			                FileWriter fileIndi = new FileWriter(dirSalida + matcherECG.group(2) + ".salida.txt");
+			            	
+			            	
+			            	// buffer de escritura individual
+			            	BufferedWriter bufferedIndi = new BufferedWriter(fileIndi);
+			            	bufferedIndi.write("Pattern: ");
+			            	
+			            	//se inserta el buffer
+			            	kSession.insert(bufferedIndi);
 			                
 			                for (Onda o: ondas) {
 			                	
 			                	kSession.insert(o);
 			                }
+			                
+			                
 			                Agenda agenda = kSession.getAgenda();
 			                agenda.getAgendaGroup("Ciclos").setFocus();
 			                kSession.fireAllRules();
@@ -68,8 +78,11 @@ public class Principal {
 			                kSession.fireAllRules();
 			                agenda.getAgendaGroup("Imprimir").setFocus();
 			                kSession.fireAllRules();
-			                System.out.print("\n\n");
 			                
+			                bufferedIndi.close();
+			                
+			                //lee el archivo individual y lo escribe en el todo
+			                escribeEnTodo(matcherECG);
 			    			
 			            } catch (Throwable t) {
 			                t.printStackTrace();
@@ -82,7 +95,79 @@ public class Principal {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//lee el archivo todo y lo imprime en consola
+		imprimeFicheroTodo();
 		
+	}
+	
+	public static void compruebaArgumentos(String[] args) {
+		
+		if(args.length == 1) {
+			
+			dirEntrada = args[0];
+			
+		}else if(args.length == 2) {
+			
+			dirEntrada = args[0];
+			dirSalida = args[1];
+		}
+	}
+	public static void escribeEnTodo(Matcher matcherECG) {
+		
+		
+		try {
+			
+			FileWriter fileTodo = new FileWriter(dirSalida + "todo.salida.txt", true);
+			BufferedWriter bufferedTodo = new BufferedWriter(fileTodo);
+	        
+	        FileReader fr = new FileReader(dirSalida + matcherECG.group(2) + ".salida.txt");
+	        BufferedReader br = new BufferedReader(fr);
+	        String linea = br.readLine();
+	        
+	        bufferedTodo.write("Archivo: " + matcherECG.group(2) + ".ecg");
+	        bufferedTodo.newLine();
+	        
+	        while(linea != null) {
+	        	
+	        	
+	        	bufferedTodo.write(linea);
+	        	bufferedTodo.newLine();
+	        	linea = br.readLine();
+	        }
+	        
+	        bufferedTodo.newLine();
+	        bufferedTodo.newLine();
+	        
+	        fr.close();
+			bufferedTodo.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+	}
+	public static void imprimeFicheroTodo() {
+		
+		
+		try {
+			FileReader fr = new FileReader(dirSalida + "todo.salida.txt");
+			BufferedReader br = new BufferedReader(fr);
+	        String linea = br.readLine();
+	        
+	        while(linea != null) {
+	        	
+	        	
+	        	System.out.println(linea);
+	        	linea = br.readLine();
+	        }
+	        br.close();
+	        
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
 	}
 
 

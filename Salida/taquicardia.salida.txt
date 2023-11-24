@@ -1,2 +1,2 @@
-Taquicardia
+Pattern: taquicardia 
 ** Hight Heart Rate present (Taquicardia) cycle: NA

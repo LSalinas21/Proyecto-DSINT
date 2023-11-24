@@ -1,2 +1,2 @@
-contraciones ventriculares prematuras
+Pattern: CVP 
 ** short QRS present (Contraccion ventricular prematura) 18

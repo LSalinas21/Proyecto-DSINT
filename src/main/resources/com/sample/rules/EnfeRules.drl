@@ -14,17 +14,11 @@ import parser.*;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 
-
-//declare any global variables here
-
-
-
-
 rule "Bradicardia"
 	agenda-group "Enfermedades"
     when
         $r: RitmoCardiaco(ppm < 60)
-    not Bradicardia_Sinusal()
+    	not Bradicardia_Sinusal()
     then
         insert(new Bradicardia_Sinusal("Bradicardia"));
         insert(new RitmoCardiacoBajo("** Low Heart Rate present (Bradicardia) cycle: NA"));
@@ -35,7 +29,7 @@ rule "Taquicardia"
 	agenda-group "Enfermedades"
     when
         $r: RitmoCardiaco(ppm > 100)
-    not Taquicardia_Sinusal(nombre == "Taquicardia")
+    	not Taquicardia_Sinusal(nombre == "Taquicardia")
     then
         insert(new Taquicardia_Sinusal("Taquicardia"));
         insert(new RitmoCardiacoAlto("** Hight Heart Rate present (Taquicardia) cycle: NA"));
@@ -46,7 +40,7 @@ rule "Hipocalcemia"
     when
         $segST: SegmentoST(duracion > 150)
         $intQT: IntervaloQT(duracion > 440 , $intQT.getNumCiclo() == $segST.getNumCiclo())
-    not Hipocalcemia(nombre == "Hipocalcemia")
+    	not Hipocalcemia(nombre == "Hipocalcemia")
     then
         insert(new Hipocalcemia("Hipocalcemia"));
         insert(new SegmentoSTLargo("** long ST present (Hipocalcemia) cycle : " + $segST.getNumCiclo()));
@@ -58,7 +52,7 @@ rule "Hipopotasemia"
     agenda-group "Enfermedades"
     when
         $ondT: OndaT(pico < 0.2)
-    not Hipopotasemia(nombre == "Hipopotasemia")
+    	not Hipopotasemia(nombre == "Hipopotasemia")
     then
         insert(new Hipopotasemia("Hipopotasemia"));
         insert(new OndasTPlanas("** negative T wave present (Hipopotasemia) cycle: " + $ondT.getNumCiclo()));
@@ -90,7 +84,6 @@ rule "enfermedad contraciones ventriculares prematuras"
         $comQRS: ComplejoQRS(duracion > 100)
     	not ComplejoQRSLargo()
     then
-        //insert(new Contracciones_Ventriculares_Prematuras("contraciones ventriculares prematuras"));
         insert(new ComplejoQRSLargo("** long QRS present (Contraccion ventricular prematura) " + $comQRS.getNumCiclo()));
 
 end
@@ -100,7 +93,6 @@ rule "contraciones ventriculares prematuras 2"
         $comQRS: ComplejoQRS(duracion < 80)
     	not ComplejoQRSCorto()
     then
-        //insert(new Contracciones_Ventriculares_Prematuras("contraciones ventriculares prematuras"));
         insert(new ComplejoQRSCorto("** short QRS present (Contraccion ventricular prematura) " + $comQRS.getNumCiclo()));
 
 end
@@ -111,7 +103,6 @@ rule "contraciones ventriculares prematuras 3"
     	ComplejoQRSCorto()
     then
         insert(new Contracciones_Ventriculares_Prematuras("contraciones ventriculares prematuras"));
-        //insert(new ComplejoQRSCorto("** short QRS present (Contraccion ventricular prematura) " + $comQRS.getNumCiclo()));
 
 end
 rule "contraciones ventriculares prematuras 4"
@@ -121,7 +112,6 @@ rule "contraciones ventriculares prematuras 4"
     	ComplejoQRSLargo()
     then
         insert(new Contracciones_Ventriculares_Prematuras("contraciones ventriculares prematuras"));
-        //insert(new ComplejoQRSCorto("** short QRS present (Contraccion ventricular prematura) " + $comQRS.getNumCiclo()));
 
 end
 
