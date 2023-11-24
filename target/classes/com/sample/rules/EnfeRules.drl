@@ -1,0 +1,118 @@
+//created on: 21 nov 2023
+package com.rules
+
+//list any import classes here.
+
+import ontology.objetos.*;
+import ontology.objetos.intervalos.*;
+import ontology.objetos.segmentos.*;
+import ontology.objetos.ondas.*;
+import ontology.objetos.complejos.*;
+import ontology.objetos.patrones.*;
+import ontology.objetos.enfermedades.*;
+import parser.*;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+
+rule "Bradicardia"
+	agenda-group "Enfermedades"
+    when
+        $r: RitmoCardiaco(ppm < 60)
+    	not Bradicardia_Sinusal()
+    then
+        insert(new Bradicardia_Sinusal("Bradicardia"));
+        insert(new RitmoCardiacoBajo("** Low Heart Rate present (Bradicardia) cycle: NA"));
+
+end
+
+rule "Taquicardia"
+	agenda-group "Enfermedades"
+    when
+        $r: RitmoCardiaco(ppm > 100)
+    	not Taquicardia_Sinusal(nombre == "Taquicardia")
+    then
+        insert(new Taquicardia_Sinusal("Taquicardia"));
+        insert(new RitmoCardiacoAlto("** Hight Heart Rate present (Taquicardia) cycle: NA"));
+
+end
+rule "Hipocalcemia"
+    agenda-group "Enfermedades"
+    when
+        $segST: SegmentoST(duracion > 150)
+        $intQT: IntervaloQT(duracion > 440 , $intQT.getNumCiclo() == $segST.getNumCiclo())
+    	not Hipocalcemia(nombre == "Hipocalcemia")
+    then
+        insert(new Hipocalcemia("Hipocalcemia"));
+        insert(new SegmentoSTLargo("** long ST present (Hipocalcemia) cycle : " + $segST.getNumCiclo()));
+        insert(new IntervaloQTLargo("** long QT present (Hipocalcemia) cycle : " + $intQT.getNumCiclo()));
+
+end
+
+rule "Hipopotasemia"
+    agenda-group "Enfermedades"
+    when
+        $ondT: OndaT(pico < 0.2)
+    	not Hipopotasemia(nombre == "Hipopotasemia")
+    then
+        insert(new Hipopotasemia("Hipopotasemia"));
+        insert(new OndasTPlanas("** negative T wave present (Hipopotasemia) cycle: " + $ondT.getNumCiclo()));
+
+end
+rule "Infarto agudo de miocardio"
+    agenda-group "Enfermedades"
+    when
+        $ondT: OndaT(pico > 1)
+        not Infarto_Agudo_de_Miocardio(nombre == "IAM")
+    then
+        insert(new Infarto_Agudo_de_Miocardio("IAM"));
+        insert(new OndasTHiperagudas("** large T wave present (IAM) cycle: " + $ondT.getNumCiclo()));
+
+end
+rule "Isquemia coronaria"
+    agenda-group "Enfermedades"
+    when
+        $ondT: OndaT(pico < 0.2)
+    	not Isquemia_Coronaria(nombre == "isq-coronaria")
+    then
+        insert(new Isquemia_Coronaria("isq-coronaria"));
+        insert(new OndasTPlanas("** negative T wave present (isq-coronaria) cycle: " + $ondT.getNumCiclo()));
+
+end
+rule "enfermedad contraciones ventriculares prematuras"
+    agenda-group "Enfermedades"
+    when
+        $comQRS: ComplejoQRS(duracion > 120)
+    	not ComplejoQRSLargo()
+    then
+        insert(new ComplejoQRSLargo("** long QRS present (Contraccion ventricular prematura) " + $comQRS.getNumCiclo()));
+
+end
+//Modificada
+rule "contraciones ventriculares prematuras 2"
+    agenda-group "Enfermedades"
+    when
+        $comQRS: ComplejoQRS(duracion < 80)
+    	not ComplejoQRSCorto()
+    then
+        insert(new ComplejoQRSCorto("** short QRS present (Contraccion ventricular prematura) " + $comQRS.getNumCiclo()));
+
+end
+rule "contraciones ventriculares prematuras 3"
+    agenda-group "Enfermedades"
+    when
+        not Contracciones_Ventriculares_Prematuras(nombre == "contraciones ventriculares prematuras")
+    	ComplejoQRSCorto()
+    then
+        insert(new Contracciones_Ventriculares_Prematuras("contraciones ventriculares prematuras"));
+
+end
+rule "contraciones ventriculares prematuras 4"
+    agenda-group "Enfermedades"
+    when
+        not Contracciones_Ventriculares_Prematuras(nombre == "contraciones ventriculares prematuras")
+    	ComplejoQRSLargo()
+    then
+        insert(new Contracciones_Ventriculares_Prematuras("contraciones ventriculares prematuras"));
+
+end
+

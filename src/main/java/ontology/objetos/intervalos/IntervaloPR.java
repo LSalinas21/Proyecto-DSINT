@@ -1,6 +1,5 @@
 package ontology.objetos.intervalos;
 
-import ontology.objetos.Ciclo;
 import ontology.objetos.Intervalo;
 import ontology.objetos.ondas.OndaP;
 import ontology.objetos.segmentos.SegmentoPR;
@@ -11,7 +10,7 @@ public class IntervaloPR extends Intervalo{
 	private SegmentoPR segPR;
 	
 	public IntervaloPR(OndaP ondP, SegmentoPR segPR) {
-		super(ondP.getInicio(), segPR.getFin());
+		super(ondP.getInicio(), segPR.getFin(), ondP.getNumCiclo());
 		this.ondP = ondP;
 		this.segPR = segPR;
 	}

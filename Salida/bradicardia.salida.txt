@@ -1,0 +1,2 @@
+Pattern: bradicardia 
+** Low Heart Rate present (Bradicardia) cycle: NA

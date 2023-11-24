@@ -3,44 +3,27 @@ package parser;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import ontology.objetos.Electrocardiograma;
 import ontology.objetos.Onda;
-import ontology.objetos.intervalos.IntervaloPR;
-import ontology.objetos.intervalos.IntervaloQT;
-import ontology.objetos.ondas.OndaP;
-import ontology.objetos.ondas.OndaQ;
-import ontology.objetos.ondas.OndaR;
-import ontology.objetos.ondas.OndaS;
-import ontology.objetos.ondas.OndaT;
-import ontology.objetos.segmentos.SegmentoTP;
-import ontology.objetos.Ciclo;
+import ontology.objetos.ondas.*;
+
 
 public class Parser {
 
-	private static String patronOndaP = "P\\((\\d+),(\\d+),(\\d+(\\.\\d+))?\\)";
-	private static String patronOndaQ = "Q\\((\\d+),(\\d+),(-{0,1}\\d+(\\.\\d+))?\\)";
-	private static String patronOndaR = "R\\((\\d+),(\\d+),(\\d+(\\.\\d+))?\\)";
-	private static String patronOndaS = "S\\((\\d+),(\\d+),(-{0,1}\\d+(\\.\\d+))?\\)";
-	private static String patronOndaT = "T\\((\\d+),(\\d+),(\\d+(\\.\\d+))?\\)";
+	private static String patronOndaP = "P\\((\\d+),(\\d+),(.*)\\)";
+	//private static String patronOndaQ = "Q\\((\\d+),(\\d+),(-{0,1}\\d+(\\.\\d+))?\\)";
+	private static String patronOndaQ = "Q\\((\\d+),(\\d+),(.*)\\)";
+	private static String patronOndaR = "R\\((\\d+),(\\d+),(.*)\\)";
+	private static String patronOndaS = "S\\((\\d+),(\\d+),(.*)\\)";
+	private static String patronOndaT = "T\\((\\d+),(\\d+),(.*)\\)";
 	
 	public ArrayList<Onda> parseFile(String fileName) throws IOException {
 
         FileReader fr = new FileReader(fileName);
         BufferedReader br = new BufferedReader(fr);
         String linea = br.readLine();
-        
-        int contCiclos = 0;
-        
-        //Electrocardiograma ecg = new Electrocardiograma();
         
         Pattern patterP = Pattern.compile(patronOndaP,
                 Pattern.CASE_INSENSITIVE);
@@ -83,8 +66,6 @@ public class Parser {
             	
             }else if (matcherQ.find()) {
             	
-
-            	
             	ondQ = new OndaQ(Integer.parseInt(matcherQ.group(1)),Integer.parseInt(matcherQ.group(2)),
 						Double.parseDouble(matcherQ.group(3)),ciclo);
             	
@@ -120,6 +101,7 @@ public class Parser {
             
         	linea = br.readLine();
         }
+        fr.close();
         	
         return listOndas;
     }

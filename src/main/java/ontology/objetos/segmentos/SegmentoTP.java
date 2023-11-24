@@ -1,6 +1,6 @@
 package ontology.objetos.segmentos;
 
-import ontology.objetos.Ciclo;
+
 import ontology.objetos.Segmento;
 
 public class SegmentoTP extends Segmento {

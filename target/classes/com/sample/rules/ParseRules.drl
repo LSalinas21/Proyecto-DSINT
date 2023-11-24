@@ -14,9 +14,9 @@ import ontology.objetos.complejos.*;
 
 
 
-rule "Crea SegementoPR"
+rule "Crea SegmentoPR"
     //include attributes such as "salience" here...
-    //agenda-group "Ciclos"
+    agenda-group "Ciclos"
     
     when
         $ondP: OndaP()
@@ -25,8 +25,9 @@ rule "Crea SegementoPR"
        	insert(new SegmentoPR($ondP.getFin(),$ondQ.getInicio(),$ondP.getNumCiclo()));
 end
 
-rule "Crea SegementoST"
+rule "Crea SegmentoST"
     //include attributes such as "salience" here...
+    agenda-group "Ciclos"
     when
         $ondS: OndaS()
         $ondT: OndaT(numCiclo == $ondS.getNumCiclo())
@@ -34,8 +35,9 @@ rule "Crea SegementoST"
        	insert(new SegmentoST($ondS.getFin(),$ondT.getInicio(),$ondS.getNumCiclo()));
 end
 
-rule "Crea SegementoTP"
+rule "Crea SegmentoTP"
     //include attributes such as "salience" here...
+    agenda-group "Ciclos"
     when
         $ondT: OndaT()
         $ondP: OndaP(numCiclo-1 == $ondT.getNumCiclo())
@@ -45,7 +47,7 @@ rule "Crea SegementoTP"
 end
 
 rule "Crea Ritmo Cardiaco"
-
+	agenda-group "Ciclos"
    when
     	$ondMin: Onda() // Patrón para seleccionar cualquier objeto Ejemplo
     	$ondMax: Onda()
@@ -59,7 +61,7 @@ rule "Crea Ritmo Cardiaco"
 end
 
 rule "Crea Complejo QRS"
-
+	agenda-group "Ciclos"
     when
 		$ondQ: OndaQ() // Patrón para seleccionar cualquier objeto Ejemplo
     	$ondR: OndaR(numCiclo == $ondQ.getNumCiclo())
@@ -70,7 +72,7 @@ rule "Crea Complejo QRS"
 
 end  
 rule "Crea intervaloPR"
-
+agenda-group "Ciclos"
     when
 		$segPR: SegmentoPR() // Patrón para seleccionar cualquier objeto Ejemplo
     	$ondP: OndaP(numCiclo == $segPR.getNumCiclo())
@@ -82,11 +84,13 @@ end
 
 rule "Crea intervalosQT"
     //include attributes such as "salience" here...
+    agenda-group "Ciclos"
     when
-		//$segPR: SegmentoPR() // Patrón para seleccionar cualquier objeto Ejemplo
-    	//$ondP: OndaP(numCiclo == $segPR.getNumCiclo())
+    	$comQRS: ComplejoQRS()
+		$segST: SegmentoST(numCiclo == $comQRS.getNumCiclo()) // Patrón para seleccionar cualquier objeto Ejemplo
+    	$ondT: OndaT(numCiclo == $segST.getNumCiclo())
     then
-       	//insert(new IntervaloPR($ondP,$segPR));
+       	insert(new IntervaloQT($comQRS,$ondT,$segST));
 end
 
 

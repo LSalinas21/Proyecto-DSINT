@@ -1,6 +1,6 @@
 package ontology.objetos.ondas;
 
-import ontology.objetos.Ciclo;
+
 import ontology.objetos.Onda;
 
 public class OndaT extends Onda{
