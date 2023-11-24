@@ -3,7 +3,6 @@ package ontology.objetos;
 public class Enfermedad {
 	
 	private String nombre;
-	private String texto;
 
 	public String getNombre() {
 		return nombre;

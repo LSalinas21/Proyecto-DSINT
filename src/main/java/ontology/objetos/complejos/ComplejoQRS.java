@@ -1,6 +1,5 @@
 package ontology.objetos.complejos;
 
-import ontology.objetos.Ciclo;
 import ontology.objetos.Complejo;
 import ontology.objetos.ondas.OndaQ;
 import ontology.objetos.ondas.OndaR;
@@ -11,6 +10,7 @@ public class ComplejoQRS extends Complejo{
 	private OndaQ ondaQ;
 	private OndaR ondaR;
 	private OndaS ondaS;
+	
 	
 	
 

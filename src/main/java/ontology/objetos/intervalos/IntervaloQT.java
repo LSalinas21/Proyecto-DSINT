@@ -1,6 +1,6 @@
 package ontology.objetos.intervalos;
 
-import ontology.objetos.Ciclo;
+
 import ontology.objetos.Intervalo;
 import ontology.objetos.complejos.ComplejoQRS;
 import ontology.objetos.ondas.OndaT;

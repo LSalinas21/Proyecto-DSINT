@@ -1,0 +1,113 @@
+//created on: 23 nov 2023
+package com.rules
+
+//list any import classes here.
+
+import ontology.objetos.*;
+import ontology.objetos.intervalos.*;
+import ontology.objetos.segmentos.*;
+import ontology.objetos.ondas.*;
+import ontology.objetos.complejos.*;
+import ontology.objetos.patrones.*;
+import ontology.objetos.enfermedades.*;
+import parser.*;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+
+//declare any global variables here
+
+
+rule "Tiene Bradicardia"
+	agenda-group "Imprimir"
+	when
+		Bradicardia_Sinusal()
+	then
+    	System.out.print("bradicardia ");
+end
+
+rule "Tiene Taquicardia"
+	agenda-group "Imprimir"
+	when
+    	Taquicardia_Sinusal()
+	then
+    	System.out.print("taquicardia ");
+end
+
+rule "Tiene Contracciones Ventriculares Prematuras"
+	agenda-group "Imprimir"
+	when
+    	Contracciones_Ventriculares_Prematuras()
+	then
+    	System.out.print("CVP ");
+end
+
+rule "Tiene Isquemia Coronaria"
+	agenda-group "Imprimir"
+	when
+    	Isquemia_Coronaria()
+	then
+    	System.out.print("ISQ ");
+end
+
+rule "Tiene Infarto Agudo De Miocardio"
+	agenda-group "Imprimir"
+	when
+    	Infarto_Agudo_de_Miocardio()
+	then
+    	System.out.print("IAM ");
+end
+
+rule "Tiene Hipocalcemia"
+	agenda-group "Imprimir"
+	when
+    	Hipocalcemia()
+	then
+    	System.out.print("Hipocalcemia ");
+end
+
+rule "Tiene Hipopotasemia"
+	agenda-group "Imprimir"
+	when
+    	Hipopotasemia()
+	then
+    	System.out.print("Hipopotasemia");
+end
+rule "No enfermo"
+	agenda-group "Imprimir"
+	when
+    	not Enfermedad()
+	then
+    	System.out.print("Abnormal pattern not found in this ECG.");
+end
+rule "muestra Diagnostico"
+	agenda-group "Imprimir"
+	salience -30
+	when
+		$pat: Patron()
+	then
+    	//FileWriter fileIndi = new FileWriter($uti.getDirSalida() + $uti.getNomArchivo() + ".salida.txt");
+    	//FileWriter fileTodo = new FileWriter($uti.getArchivoTodo(), true);
+    	//BufferedWriter bufferedIndi = new BufferedWriter(fileIndi);
+    	//BufferedWriter bufferedTodo = new BufferedWriter(fileTodo);
+    	
+    	//bufferedTodo.write("Archivo de entrada: " + $uti.getNomArchivo() + ".ecg");
+    	//bufferedTodo.newLine();
+    	
+    	//bufferedIndi.write($dig.getEnfermedades());
+    	//bufferedTodo.write($dig.getEnfermedades());
+    	
+    	//bufferedIndi.newLine();
+    	//bufferedTodo.newLine();
+    	
+    	//bufferedIndi.write($dig.getPatrones());
+    	//bufferedTodo.write($dig.getPatrones());
+    	
+    	//bufferedTodo.newLine();
+    	//bufferedTodo.newLine();
+    	
+    	//bufferedTodo.close();
+    	//bufferedIndi.close();
+        System.out.print("\n" + $pat.getNombre());
+
+
+end

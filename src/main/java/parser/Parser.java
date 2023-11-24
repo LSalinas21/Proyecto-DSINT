@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import ontology.objetos.ECG;
+
 import ontology.objetos.Onda;
 import ontology.objetos.intervalos.IntervaloPR;
 import ontology.objetos.intervalos.IntervaloQT;
@@ -22,7 +22,7 @@ import ontology.objetos.ondas.OndaR;
 import ontology.objetos.ondas.OndaS;
 import ontology.objetos.ondas.OndaT;
 import ontology.objetos.segmentos.SegmentoTP;
-import ontology.objetos.Ciclo;
+
 
 public class Parser {
 

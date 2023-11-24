@@ -66,8 +66,9 @@ public class Principal {
 			                kSession.fireAllRules();
 			                agenda.getAgendaGroup("Enfermedades").setFocus();
 			                kSession.fireAllRules();
-			                agenda.getAgendaGroup("Diagnostico").setFocus();
+			                agenda.getAgendaGroup("Imprimir").setFocus();
 			                kSession.fireAllRules();
+			                System.out.print("\n\n");
 			                
 			    			
 			            } catch (Throwable t) {

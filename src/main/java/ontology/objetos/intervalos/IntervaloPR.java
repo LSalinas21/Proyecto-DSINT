@@ -1,6 +1,5 @@
 package ontology.objetos.intervalos;
 
-import ontology.objetos.Ciclo;
 import ontology.objetos.Intervalo;
 import ontology.objetos.ondas.OndaP;
 import ontology.objetos.segmentos.SegmentoPR;

@@ -49,6 +49,14 @@ Hipopotasemia + isq-coronaria
 ** negative T wave present (Hipopotasemia) cycle: 1
 ** negative T wave present (isq-coronaria) cycle: 1
 
+Archivo de entrada: premat-vent-contr1.ecg
+contraciones ventriculares prematuras
+** short QRS present (Contraccion ventricular prematura) 18
+
+Archivo de entrada: premat-vent-contr2.ecg
+contraciones ventriculares prematuras
+** short QRS present (Contraccion ventricular prematura) 19
+
 Archivo de entrada: taquicardia.ecg
 Taquicardia
 ** Hight Heart Rate present (Taquicardia) cycle: NA
