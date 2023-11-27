@@ -12,8 +12,8 @@ import ontology.objetos.ondas.*;
 
 public class Parser {
 
+	// Expresiones regulares para identificar cada una de las ondas
 	private static String patronOndaP = "P\\((\\d+),(\\d+),(.*)\\)";
-	//private static String patronOndaQ = "Q\\((\\d+),(\\d+),(-{0,1}\\d+(\\.\\d+))?\\)";
 	private static String patronOndaQ = "Q\\((\\d+),(\\d+),(.*)\\)";
 	private static String patronOndaR = "R\\((\\d+),(\\d+),(.*)\\)";
 	private static String patronOndaS = "S\\((\\d+),(\\d+),(.*)\\)";
@@ -46,6 +46,7 @@ public class Parser {
         
     	int ciclo = 0;
     	
+    	// Vamos leyendo cada una de las lineas del archivo de entrada
         while(linea != null) {
         	
         	Matcher matcherP = patterP.matcher(linea);
@@ -55,6 +56,7 @@ public class Parser {
         	Matcher matcherT = patterT.matcher(linea);
         	
 
+        	// Comprobamos que patron ha hecho match y agregamos la onda correspondiente
             if (matcherP.find()) {
 
             	ciclo++;

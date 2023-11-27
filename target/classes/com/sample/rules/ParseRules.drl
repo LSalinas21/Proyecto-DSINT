@@ -15,9 +15,7 @@ import ontology.objetos.complejos.*;
 
 
 rule "Crea SegmentoPR"
-    //include attributes such as "salience" here...
     agenda-group "Ciclos"
-    
     when
         $ondP: OndaP()
         $ondQ: OndaQ(numCiclo == $ondP.getNumCiclo())
@@ -26,7 +24,6 @@ rule "Crea SegmentoPR"
 end
 
 rule "Crea SegmentoST"
-    //include attributes such as "salience" here...
     agenda-group "Ciclos"
     when
         $ondS: OndaS()
@@ -36,7 +33,6 @@ rule "Crea SegmentoST"
 end
 
 rule "Crea SegmentoTP"
-    //include attributes such as "salience" here...
     agenda-group "Ciclos"
     when
         $ondT: OndaT()
@@ -48,7 +44,7 @@ end
 
 rule "Crea Ritmo Cardiaco"
 	agenda-group "Ciclos"
-   when
+	when
     	$ondMin: Onda() // Patrón para seleccionar cualquier objeto Ejemplo
     	$ondMax: Onda()
     	not Onda(inicio < $ondMin.getInicio()) // No hay otro objeto con valorBajo menor
@@ -68,22 +64,18 @@ rule "Crea Complejo QRS"
     	$ondS: OndaS(numCiclo == $ondQ.getNumCiclo())
     then
        	insert(new ComplejoQRS($ondQ,$ondR,$ondS));
-       
+end
 
-end  
 rule "Crea intervaloPR"
-agenda-group "Ciclos"
+	agenda-group "Ciclos"
     when
 		$segPR: SegmentoPR() // Patrón para seleccionar cualquier objeto Ejemplo
     	$ondP: OndaP(numCiclo == $segPR.getNumCiclo())
     then
        	insert(new IntervaloPR($ondP,$segPR));
-       
-
 end
 
 rule "Crea intervalosQT"
-    //include attributes such as "salience" here...
     agenda-group "Ciclos"
     when
     	$comQRS: ComplejoQRS()

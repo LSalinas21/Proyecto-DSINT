@@ -79,6 +79,7 @@ rule "Tiene Hipopotasemia"
 	then
     	$buffer.write("Hipopotasemia");
 end
+
 rule "No enfermo"
 	agenda-group "Imprimir"
 	when
@@ -87,6 +88,7 @@ rule "No enfermo"
 	then
     	$buffer.write("Abnormal pattern not found in this ECG.");
 end
+
 rule "muestra Diagnostico"
 	agenda-group "Imprimir"
 	salience -30

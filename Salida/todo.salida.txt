@@ -1,0 +1,88 @@
+Archivo: bradicardia.ecg
+Pattern: bradicardia 
+** Low Heart Rate present (Bradicardia) cycle: NA
+
+
+Archivo: bradicardia2.ecg
+Pattern: bradicardia 
+** Low Heart Rate present (Bradicardia) cycle: NA
+
+
+Archivo: hipocalcemia+hipopotasemia.ecg
+Pattern: CVP ISQ Hipocalcemia Hipopotasemia
+** long ST present (Hipocalcemia) cycle : 6
+** long QT present (Hipocalcemia) cycle : 6
+** negative T wave present (Hipopotasemia) cycle: 6
+** negative T wave present (isq-coronaria) cycle: 6
+** long QRS present (Contraccion ventricular prematura) 6
+
+
+Archivo: hipocalcemia+iam.ecg
+Pattern: CVP IAM Hipocalcemia 
+** long ST present (Hipocalcemia) cycle : 1
+** long QT present (Hipocalcemia) cycle : 1
+** large T wave present (IAM) cycle: 1
+** long QRS present (Contraccion ventricular prematura) 1
+
+
+Archivo: hipocalcemia+isqcoronaria.ecg
+Pattern: CVP ISQ Hipocalcemia Hipopotasemia
+** long ST present (Hipocalcemia) cycle : 4
+** long QT present (Hipocalcemia) cycle : 4
+** negative T wave present (Hipopotasemia) cycle: 4
+** negative T wave present (isq-coronaria) cycle: 4
+** long QRS present (Contraccion ventricular prematura) 4
+
+
+Archivo: hipocalcemia.ecg
+Pattern: CVP Hipocalcemia 
+** long ST present (Hipocalcemia) cycle : 3
+** long QT present (Hipocalcemia) cycle : 3
+** long QRS present (Contraccion ventricular prematura) 3
+
+
+Archivo: hipopotasemia.ecg
+Pattern: ISQ Hipopotasemia
+** negative T wave present (Hipopotasemia) cycle: 1
+** negative T wave present (isq-coronaria) cycle: 1
+
+
+Archivo: iam.ecg
+Pattern: IAM 
+** large T wave present (IAM) cycle: 1
+
+
+Archivo: isq-coronaria.ecg
+Pattern: ISQ Hipopotasemia
+** negative T wave present (Hipopotasemia) cycle: 1
+** negative T wave present (isq-coronaria) cycle: 1
+
+
+Archivo: normal.ecg
+Pattern: Abnormal pattern not found in this ECG.
+
+
+Archivo: normal2.ecg
+Pattern: Abnormal pattern not found in this ECG.
+
+
+Archivo: premat-vent-contr1.ecg
+Pattern: CVP 
+** short QRS present (Contraccion ventricular prematura) 18
+
+
+Archivo: premat-vent-contr2.ecg
+Pattern: CVP 
+** short QRS present (Contraccion ventricular prematura) 19
+
+
+Archivo: taquicardia.ecg
+Pattern: taquicardia 
+** Hight Heart Rate present (Taquicardia) cycle: NA
+
+
+Archivo: taquicardia2.ecg
+Pattern: taquicardia 
+** Hight Heart Rate present (Taquicardia) cycle: NA
+
+

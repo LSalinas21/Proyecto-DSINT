@@ -28,7 +28,6 @@ public class Principal {
 	private static String patronECG = "^(.*\\\\)([^\\\\]+)\\.(\\w+)$";
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		// comprobacion de las rutas
 		compruebaArgumentos(args);
 		
@@ -42,11 +41,9 @@ public class Principal {
 			    	Matcher matcherECG = patterP.matcher(ruta.toString());
 			    	if (matcherECG.find()) {
 
-			    		//System.out.println(matcherECG.group(0));
 			    		
 			    		try {
 			                // load up the knowledge base
-			    			//System.out.println("\n\n\n" + ruta);
 			    			
 			                KieServices ks = KieServices.Factory.get();
 			                KieContainer kContainer = ks.getKieClasspathContainer();
@@ -58,8 +55,7 @@ public class Principal {
 			                
 			                //archivo de salida individual
 			                FileWriter fileIndi = new FileWriter(dirSalida + matcherECG.group(2) + ".salida.txt");
-			            	
-			            	
+			                
 			            	// buffer de escritura individual
 			            	BufferedWriter bufferedIndi = new BufferedWriter(fileIndi);
 			            	bufferedIndi.write("Pattern: ");
@@ -72,7 +68,7 @@ public class Principal {
 			                	kSession.insert(o);
 			                }
 			                
-			                
+			                // Disparamos las reglas
 			                Agenda agenda = kSession.getAgenda();
 			                agenda.getAgendaGroup("Ciclos").setFocus();
 			                kSession.fireAllRules();
@@ -104,6 +100,7 @@ public class Principal {
 		
 	}
 	
+	// Funcion para comprobar que hay 2 argumentos de entrada
 	public static void compruebaArgumentos(String[] args) {
 		
 		if(args.length == 1) {
@@ -116,8 +113,9 @@ public class Principal {
 			dirSalida = args[1];
 		}
 	}
+	
+	// Agrega el ultimo diagnostico en el fichero "todo", donde estan todos los diagnosticos
 	public static void escribeEnTodo(Matcher matcherECG) {
-		
 		
 		try {
 			
@@ -151,6 +149,8 @@ public class Principal {
 		}
         
 	}
+	
+	// Imprime el fichero con todos los diagnosticos
 	public static void imprimeFicheroTodo() {
 		
 		
