@@ -1,6 +1,0 @@
-Pattern: CVP ISQ Hipocalcemia Hipopotasemia
-** long ST present (Hipocalcemia) cycle : 6
-** long QT present (Hipocalcemia) cycle : 6
-** negative T wave present (Hipopotasemia) cycle: 6
-** negative T wave present (isq-coronaria) cycle: 6
-** long QRS present (Contraccion ventricular prematura) 6
